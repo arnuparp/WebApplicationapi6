@@ -26,6 +26,26 @@ namespace WebApplicationapi6.Controllers
         [HttpGet]
         public IActionResult GetAllsumProduct()
         {
+        // Quary in storedProcedure
+        /*  select 
+ distinct d.Product_Name
+ ,d.Price
+ ,inp.qry as Input
+ ,isnull(ino.qry,0) as Outpu
+ ,isnull(inc.qry,0) as OutC
+ ,inp.qry - isnull(ino.qry,0) - isnull(inc.qry,0)  as Remain
+  from Tbl_Product  d
+  left join 
+  (select Product_Name,sum(g.Quantity) as qry from Tbl_Product g where g.Status = 1
+  group by Product_Name  ) inp on d.Product_Name = inp.Product_Name
+    left join 
+  (select Product_Name,count(g.Id_tran) as qry from Tbl_Transection g where g.Status  =2
+  group by Product_Name  ) ino on d.Product_Name = ino.Product_Name
+    left join 
+  (select g.Product_Name,count(g.Id_tran) as qry from Tbl_Transection g where g.Status =1
+  group by Product_Name  ) inc on d.Product_Name = inc.Product_Name*/
+
+  
             using (SqlConnection connection = new SqlConnection("Server =.\\SQLEXPRESS; Database = Stock_T; User Id = sa; Password = 123456; TrustServerCertificate = true"))
             {
                 connection.Open();
